@@ -1,0 +1,25 @@
+{
+  "name": "experiencias-diferentes",
+  "version": "0.0.1",
+  "description": "- Se trata de una web donde los usuarios buscan aventuras",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Cristina Domínguez",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.8",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.8",
+    "express": "^4.17.1",
+    "morgan": "^1.10.8",
+    "mysql2": "^2.3.0"
+  }
+}
