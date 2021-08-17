@@ -1,6 +1,12 @@
 require("dotenv").config(); // gestiona las variables de entorno .env
-const express = require("express"); // aplicacion para web para iniciar un servidorrrancar el servidor
+const express = require("express"); // aplicacion para web para arrancar el servidor
 const morgan = require("morgan"); // imprimo datos de la peticion desde postman metodo ruta
+const { 
+  listExperiencias, 
+  infoExperiencia, 
+  nuevaExperiencia, 
+  modExperiencia, 
+  eliminaExperiencia } = require("./controladores/experiencias");
 
 const {PORT, HOST} = process.env; //console.log(process.env);
 
@@ -14,12 +20,30 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //peticiones desde postman 
-// GET 
+// GET - / Home page
+app.get("/", (req, res, next) => {
+  res.send({
+    status: "ok",
+    message: "Página principal"
+  });
+});
+//GET - /experiencias - lista todas las experiencias
+app.get("/experiencias", listExperiencias);
+
+// GET - /experiencias/:id - muestra la info de una experiencia
+app.get("/experiencias/:id", infoExperiencia);
+
+// POST - /experiencias/- crea una experiencia
+app.post("/experiencias", nuevaExperiencia);
+
+// PUT - /experiencias/:id - edita una experiencia
+app.put("/experiencias/:id", modExperiencia);
+
+// DELETE - /experiencias/:id
+app.delete("/experiencias/:id", eliminaExperiencia);
 
 
-//express me da una respuesta de todas las rutas tanto si existen como si no
-//que será en formato json porque se lo pongo aqui asi compruebo que funciona la conexion
-//por lo que aqui podemos gestionar todos los errores
+//aqui podemos gestionar todos los errores
 app.use((req, res, next) => {
   console.log(res);
   res.status(404).send({
