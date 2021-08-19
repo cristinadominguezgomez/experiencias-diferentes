@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "7614ebc4-90ae-4de1-bc00-070d6fe0cfa4",
+		"name": "API experiencias diferentes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Experiencias",
+			"item": [
+				{
+					"name": "homePage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:4000/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listExperiencias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:4000/experiencias?search=Coruña",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"experiencias"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Coruña"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nuevaExperiencia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:4000/experiencias",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"experiencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "infoExperiencia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:4000/experiencias",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"experiencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modExperiencia",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:4000/experiencias/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"experiencias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminaExperiencia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:4000/experiencias/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "4000",
+							"path": [
+								"experiencias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
