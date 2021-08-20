@@ -44,10 +44,11 @@ app.delete("/experiencias/:id", eliminaExperiencia);
 
 
 //aqui podemos gestionar todos los errores
-app.use((req, res, next) => {
-  console.log(res);
+app.use((error, req, res, next) => {
+  //console.log(res);
   res.status(404).send({
     status: "error",
+    message: error.message,
       
   });
 });
