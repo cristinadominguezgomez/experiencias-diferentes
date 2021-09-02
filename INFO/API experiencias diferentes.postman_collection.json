@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7614ebc4-90ae-4de1-bc00-070d6fe0cfa4",
+		"_postman_id": "797affd2-b73e-410b-91c6-9fe93b1f4994",
 		"name": "API experiencias diferentes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -36,7 +36,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:4000/experiencias?search=Coruña",
+							"raw": "http://127.0.0.1:4000/experiencias?search=east",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -51,7 +51,7 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "Coruña"
+									"value": "east"
 								}
 							]
 						}
@@ -63,6 +63,78 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "titulo",
+									"value": "Viaje en globo",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "Sobrevuela el norte de España",
+									"type": "text"
+								},
+								{
+									"key": "localidad",
+									"value": "A Coruña",
+									"type": "text"
+								},
+								{
+									"key": "n_plazas",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "f_inicio",
+									"value": "2021-09-01",
+									"type": "text"
+								},
+								{
+									"key": "f_fin",
+									"value": "2021-09-01",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "foto1",
+									"type": "file",
+									"src": "/home/administrador/Documentos/hack-a-boss/repositorios_locales/imagenes/fotoglobo1.jpg"
+								},
+								{
+									"key": "foto2",
+									"type": "file",
+									"src": "/home/administrador/Documentos/hack-a-boss/repositorios_locales/imagenes/fotoglobo2.jpg"
+								},
+								{
+									"key": "foto3",
+									"type": "file",
+									"src": "/home/administrador/Documentos/hack-a-boss/repositorios_locales/imagenes/fotoglobo3.jpg"
+								},
+								{
+									"key": "foto4",
+									"type": "file",
+									"src": "/home/administrador/Documentos/hack-a-boss/repositorios_locales/imagenes/fotoglobo4.jpg"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
 						"url": {
 							"raw": "http://127.0.0.1:4000/experiencias",
 							"protocol": "http",
@@ -86,7 +158,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:4000/experiencias",
+							"raw": "http://127.0.0.1:4000/experiencias/11",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -96,7 +168,8 @@
 							],
 							"port": "4000",
 							"path": [
-								"experiencias"
+								"experiencias",
+								"11"
 							]
 						}
 					},
@@ -149,6 +222,28 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Recursos estaticos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:4000/ca784c31-8515-42b6-a1e1-c0f29767db27.jpg",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"ca784c31-8515-42b6-a1e1-c0f29767db27.jpg"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

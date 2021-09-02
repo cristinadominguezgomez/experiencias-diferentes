@@ -32,11 +32,26 @@ const infoExperiencia = async (req, res, next) => {
       [id]
     );
 
-    console.log(result);
+    let [single] = result;
+
+    const [fotos] = await connection.query(
+      `
+      SELECT id, foto, fecha_foto
+      FROM experiencia_foto
+      WHERE experiencia_id = ?
+    
+    `,
+      [id]
+    );
+
+    //añado el objeto con las fotos a la informacion de la experiencia
 
     res.send({
       status: "ok",
-      data: result,
+      data: {
+        ...single,
+        fotos,
+      },
     });
   } catch (error) {
     next(error);

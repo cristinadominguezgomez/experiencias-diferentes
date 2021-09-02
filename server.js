@@ -1,15 +1,17 @@
 require("dotenv").config(); // gestiona las variables de entorno .env
+const path = require("path");
 const express = require("express"); // aplicacion para web para arrancar el servidor
 const morgan = require("morgan"); // imprimo datos de la peticion desde postman metodo ruta
 const fileUpload = require("express-fileupload"); //para leer el body form data para la subida de imagenes
-const { 
-  listExperiencias, 
-  infoExperiencia, 
-  nuevaExperiencia, 
-  modExperiencia, 
-  eliminaExperiencia } = require("./controladores/experiencias");
+const {
+  listExperiencias,
+  infoExperiencia,
+  nuevaExperiencia,
+  modExperiencia,
+  eliminaExperiencia,
+} = require("./controladores/experiencias");
 
-const {PORT, HOST} = process.env; //console.log(process.env);
+const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.env);
 
 const app = express(); //creo instancia de express - llamo a express() para cada peticion
 //tiene un metodo, una ruta y una funcion
@@ -20,17 +22,19 @@ app.use(morgan("dev"));
 //para gestionar el body usamos una funcion (middleware de express que es express.json()
 app.use(express.json());
 
+//middleware para acceder desde postmas a los recursos estaticos
+app.use(express.static(path.join(__dirname, RECURSOS_DIRECTORY)));
+
 //para gestionar el body para subida de imagenes (multipart form data)
 //multer ó express-fileupload
 app.use(fileUpload());
 
-
-//peticiones desde postman 
+//peticiones desde postman
 // GET - / Home page
 app.get("/", (req, res, next) => {
   res.send({
     status: "ok",
-    message: "Página principal"
+    message: "Página principal",
   });
 });
 //GET - /experiencias - lista todas las experiencias
@@ -48,10 +52,9 @@ app.put("/experiencias/:id", modExperiencia);
 // DELETE - /experiencias/:id
 app.delete("/experiencias/:id", eliminaExperiencia);
 
-
 // middleware para gestionar todos los errores
 
-app.use ((error, req, res, next) => {
+app.use((error, req, res, next) => {
   res.status(error.httpStatus || 500).send({
     status: "error",
     message: error.message,
@@ -65,10 +68,8 @@ app.use((req, res, next) => {
   res.status(404).send({
     status: "error",
     message: "página no encontrada",
-      
   });
 });
-
 
 //express pone en escucha nuestro servidor
 app.listen(PORT, HOST, () => {
