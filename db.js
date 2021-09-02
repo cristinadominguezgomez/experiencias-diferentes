@@ -8,6 +8,8 @@ const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
 
 let pool;
 
+console.log(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE);
+
 async function getDB() {
   if (!pool) {
     pool = mysql.createPool({
@@ -21,7 +23,6 @@ async function getDB() {
   }
   //devuelve una conexión
   return await pool.getConnection();
-
 }
 
 module.exports = getDB;

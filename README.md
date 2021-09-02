@@ -9,7 +9,7 @@
 
 - GET - /experiencias - lista todas las experiencias con filtro ✅
 - GET - /experiencias/:id - muestra la info de una experiencia ✅ faltan las fotos
-- POST - /experiencias/:id - crea una experiencia
+- POST - /experiencias/:id - crea una experiencia ✅
 - POST - /experiencias/:id/fotos - añade una imagen a una experiencia
 - PUT - /experiencias/:id - edita una experiencia
 - DELETE - /experiencias/:id

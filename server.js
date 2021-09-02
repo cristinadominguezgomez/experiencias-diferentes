@@ -1,6 +1,7 @@
 require("dotenv").config(); // gestiona las variables de entorno .env
 const express = require("express"); // aplicacion para web para arrancar el servidor
 const morgan = require("morgan"); // imprimo datos de la peticion desde postman metodo ruta
+const fileUpload = require("express-fileupload"); //para leer el body form data para la subida de imagenes
 const { 
   listExperiencias, 
   infoExperiencia, 
@@ -18,6 +19,11 @@ app.use(morgan("dev"));
 
 //para gestionar el body usamos una funcion (middleware de express que es express.json()
 app.use(express.json());
+
+//para gestionar el body para subida de imagenes (multipart form data)
+//multer ó express-fileupload
+app.use(fileUpload());
+
 
 //peticiones desde postman 
 // GET - / Home page
@@ -43,12 +49,22 @@ app.put("/experiencias/:id", modExperiencia);
 app.delete("/experiencias/:id", eliminaExperiencia);
 
 
-//aqui podemos gestionar todos los errores
-app.use((error, req, res, next) => {
+// middleware para gestionar todos los errores
+
+app.use ((error, req, res, next) => {
+  res.status(error.httpStatus || 500).send({
+    status: "error",
+    message: error.message,
+  });
+});
+
+// middleware para página no encontrada
+
+app.use((req, res, next) => {
   //console.log(res);
   res.status(404).send({
     status: "error",
-    message: error.message,
+    message: "página no encontrada",
       
   });
 });
