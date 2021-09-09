@@ -8,10 +8,10 @@
 - Endpoints:
 
 - GET - /experiencias - lista todas las experiencias con filtro ✅
-- GET - /experiencias/:id - muestra la info de una experiencia ✅ faltan las fotos ✅
+- GET - /experiencias/:id - muestra la info de una experiencia con fotos ✅
 - POST - /experiencias/:id - crea una experiencia ✅
 - POST - /experiencias/:id/fotos - añade una imagen a una experiencia
-- PUT - /experiencias/:id - edita una experiencia
+- PUT - /experiencias/:id - edita una experiencia (solo campos modificables: titulo, descripcion, localidad, n_plazas, f_inicio, f_fin, precio) ✅
 - DELETE - /experiencias/:id
 - DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experiencia
 - POST - /experiencia/:id/votos - vota una experiencia
