@@ -11,7 +11,7 @@
 - GET - /experiencias/:id - muestra la info de una experiencia con fotos ✅
 - POST - /experiencias/:id - crea una experiencia ✅
 - POST - /experiencias/:id/fotos - añade una imagen a una experiencia
-- PUT - /experiencias/:id - edita una experiencia (solo campos modificables: titulo, descripcion, localidad, n_plazas, f_inicio, f_fin, precio) ✅
-- DELETE - /experiencias/:id
+- PUT - /experiencias/:id - edita el titulo, la descripcion, la localidad el numero de plazas, las fechas de inicio y fin y el precion de una experiencia ✅
+- DELETE - /experiencias/:id ✅
 - DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experiencia
 - POST - /experiencia/:id/votos - vota una experiencia

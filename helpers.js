@@ -1,5 +1,6 @@
 const { format } = require("date-fns"); //modulo para formatear fechas
-const { ensureDir } = require("fs-extra");
+// unlink para eliminar el path de las fotos
+const { ensureDir, unlink } = require("fs-extra");
 const path = require("path");
 const sharp = require("sharp");
 const uuid = require("uuid");
@@ -34,7 +35,13 @@ async function guardarFoto(foto) {
   return nombreImagen;
 }
 
+async function eliminarFoto(nombreImagen) {
+  const pathFoto = path.join(recursosDir, nombreImagen);
+  await unlink(pathFoto);
+}
+
 module.exports = {
   formatDate,
   guardarFoto,
+  eliminarFoto,
 };

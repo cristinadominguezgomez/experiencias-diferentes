@@ -18,9 +18,7 @@ const nuevaExperiencia = async (req, res, next) => {
       precio,
     } = req.body;
 
-    //console.log(titulo,descripcion, localidad, n_plazas, f_inicio, f_fin, precio);
-    //console.log(req.body);
-    console.log(req); // para ver el data de la foto
+    //console.log(req); // para ver el data de la foto
 
     if (
       !titulo ||
@@ -57,17 +55,14 @@ const nuevaExperiencia = async (req, res, next) => {
       ]
     );
 
-    //console.log(result); //busco el id y lo saco
-
     //saco el id de la nueva experiencia
-    const { insertId } = [result];
+    const [{ insertId }] = [result];
 
     //proceso las fotos
     const fotos = [];
 
     if (req.files && Object.keys(req.files).length > 0) {
       for (const foto of Object.values(req.files).slice(0, 4)) {
-        console.log(foto);
         //creo en helpers una funcion async que me guarda las fotos en el pc
         const nombreFoto = await guardarFoto(foto);
         fotos.push(nombreFoto);
