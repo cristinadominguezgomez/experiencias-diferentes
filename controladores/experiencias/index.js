@@ -5,6 +5,7 @@ const modExperiencia = require("./modExperiencia");
 const eliminaExperiencia = require("./eliminaExperiencia");
 const añadirFotosExperiencia = require("./añadirFotosExperiencia");
 const eliminarFotosExperiencia = require("./eliminarFotosExperiencia");
+const votarExperiencia = require("./votarExperiencia");
 
 module.exports = {
   listExperiencias,
@@ -14,4 +15,5 @@ module.exports = {
   eliminaExperiencia,
   añadirFotosExperiencia,
   eliminarFotosExperiencia,
+  votarExperiencia,
 };

@@ -11,6 +11,7 @@ const {
   eliminaExperiencia,
   añadirFotosExperiencia,
   eliminarFotosExperiencia,
+  votarExperiencia,
 } = require("./controladores/experiencias");
 
 const existeExperiencia = require("./middlewares/existeExperiencia");
@@ -64,6 +65,9 @@ app.delete("/experiencias/:id", existeExperiencia, eliminaExperiencia);
 
 // POST - /experiencias/:id/fotos - añade una imagen a una experiencia
 app.post("/experiencias/:id/fotos", existeExperiencia, añadirFotosExperiencia);
+
+//POST - /experiencia/:id/votos/:userId - vota una experiencia
+app.post("/experiencia/:id/votos/:idPart", existeExperiencia, votarExperiencia);
 
 // middleware para gestionar todos los errores
 
