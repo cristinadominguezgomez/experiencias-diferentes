@@ -36,7 +36,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:4000/experiencias?search=east",
+							"raw": "http://127.0.0.1:4000/experiencias",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -51,7 +51,8 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "east"
+									"value": "south",
+									"disabled": true
 								}
 							]
 						}
@@ -73,7 +74,7 @@
 								},
 								{
 									"key": "descripcion",
-									"value": "Sobrevuela el norte de España",
+									"value": "Flotar sobre las nubes",
 									"type": "text"
 								},
 								{
@@ -88,12 +89,12 @@
 								},
 								{
 									"key": "f_inicio",
-									"value": "2021-09-01",
+									"value": "2021-09-09",
 									"type": "text"
 								},
 								{
 									"key": "f_fin",
-									"value": "2021-09-01",
+									"value": "2021-09-09",
 									"type": "text"
 								},
 								{
@@ -136,7 +137,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:4000/experiencias",
+							"raw": "http://127.0.0.1:4000/experiencias/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -146,7 +147,8 @@
 							],
 							"port": "4000",
 							"path": [
-								"experiencias"
+								"experiencias",
+								""
 							]
 						}
 					},
@@ -180,8 +182,17 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha_insert\": \"2021-09-09T19:55:28.000Z\",\n    \"titulo\": \"PUT Viaje en globo\",\n    \"descripcion\": \"Sobrevuela el norte de España\",\n    \"localidad\": \"A Coruña\",\n    \"n_plazas\": 4,\n    \"f_inicio\": \"2021-09-01\",\n    \"f_fin\": \"2021-09-01\",\n    \"precio\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:4000/experiencias/1",
+							"raw": "http://127.0.0.1:4000/experiencias/11",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -192,7 +203,7 @@
 							"port": "4000",
 							"path": [
 								"experiencias",
-								"1"
+								"11"
 							]
 						}
 					},
@@ -229,7 +240,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:4000/ca784c31-8515-42b6-a1e1-c0f29767db27.jpg",
+					"raw": "http://127.0.0.1:4000/160fb48e-8c63-4a16-be47-856b6a06d8cf.jpg",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -239,7 +250,47 @@
 					],
 					"port": "4000",
 					"path": [
-						"ca784c31-8515-42b6-a1e1-c0f29767db27.jpg"
+						"160fb48e-8c63-4a16-be47-856b6a06d8cf.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "añadirFotoExperiencia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file1",
+							"type": "file",
+							"src": "/home/administrador/Documentos/hack-a-boss/diario-de-viaje/dia_6/imagenes/coruna2.jpg"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:4000/experiencias/2/fotos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4000",
+					"path": [
+						"experiencias",
+						"2",
+						"fotos"
 					]
 				}
 			},

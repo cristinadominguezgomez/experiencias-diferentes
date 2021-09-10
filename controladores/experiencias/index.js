@@ -3,8 +3,7 @@ const infoExperiencia = require("./infoExperiencia");
 const nuevaExperiencia = require("./nuevaExperiencia");
 const modExperiencia = require("./modExperiencia");
 const eliminaExperiencia = require("./eliminaExperiencia");
-
-
+const añadirFotosExperiencia = require("./añadirFotosExperiencia");
 
 module.exports = {
   listExperiencias,
@@ -12,5 +11,5 @@ module.exports = {
   nuevaExperiencia,
   modExperiencia,
   eliminaExperiencia,
-  
-}
+  añadirFotosExperiencia,
+};

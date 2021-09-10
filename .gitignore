@@ -1,3 +1,4 @@
 node_modules/
 recursos/
 .env
+modeloControlador.js

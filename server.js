@@ -9,6 +9,7 @@ const {
   nuevaExperiencia,
   modExperiencia,
   eliminaExperiencia,
+  añadirFotosExperiencia,
 } = require("./controladores/experiencias");
 
 const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.env);
@@ -22,7 +23,7 @@ app.use(morgan("dev"));
 //para gestionar el body usamos una funcion (middleware de express que es express.json()
 app.use(express.json());
 
-//middleware para acceder desde postmas a los recursos estaticos
+//middleware para acceder desde postman a los recursos estaticos
 app.use(express.static(path.join(__dirname, RECURSOS_DIRECTORY)));
 
 //para gestionar el body para subida de imagenes (multipart form data)
@@ -49,8 +50,11 @@ app.post("/experiencias", nuevaExperiencia);
 // PUT - /experiencias/:id - edita una experiencia
 app.put("/experiencias/:id", modExperiencia);
 
-// DELETE - /experiencias/:id
+// DELETE - /experiencias/:id - borra una experiencia
 app.delete("/experiencias/:id", eliminaExperiencia);
+
+// POST - /experiencias/:id/fotos - añade una imagen a una experiencia
+app.post("/experiencias/:id/fotos", añadirFotosExperiencia);
 
 // middleware para gestionar todos los errores
 

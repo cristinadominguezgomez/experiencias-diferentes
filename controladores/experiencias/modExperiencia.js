@@ -32,6 +32,8 @@ const modExperiencia = async (req, res, next) => {
       precio,
     } = req.body;
 
+    console.log(req.body);
+
     //compruebo los campos obligatorios
     if (
       !titulo ||
