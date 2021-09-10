@@ -9,8 +9,6 @@ const añadirFotosExperiencia = async (req, res, next) => {
 
     const { id } = req.params;
 
-    //controlar si existe la experiencia con este id
-
     // controlar que la experiencia tenga ya 4 fotos
     const [currentFotos] = await connection.query(
       `

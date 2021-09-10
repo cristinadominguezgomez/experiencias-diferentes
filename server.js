@@ -10,7 +10,10 @@ const {
   modExperiencia,
   eliminaExperiencia,
   añadirFotosExperiencia,
+  eliminarFotosExperiencia,
 } = require("./controladores/experiencias");
+
+const existeExperiencia = require("./middlewares/existeExperiencia");
 
 const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.env);
 
@@ -42,19 +45,25 @@ app.get("/", (req, res, next) => {
 app.get("/experiencias", listExperiencias);
 
 // GET - /experiencias/:id - muestra la info de una experiencia
-app.get("/experiencias/:id", infoExperiencia);
+app.get("/experiencias/:id", existeExperiencia, infoExperiencia);
 
 // POST - /experiencias/- crea una experiencia
 app.post("/experiencias", nuevaExperiencia);
 
 // PUT - /experiencias/:id - edita una experiencia
-app.put("/experiencias/:id", modExperiencia);
+app.put("/experiencias/:id", existeExperiencia, modExperiencia);
 
+// DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experienciapare
+app.delete(
+  "/experiencias/:id/fotos/:fotoId",
+  existeExperiencia,
+  eliminarFotosExperiencia
+);
 // DELETE - /experiencias/:id - borra una experiencia
-app.delete("/experiencias/:id", eliminaExperiencia);
+app.delete("/experiencias/:id", existeExperiencia, eliminaExperiencia);
 
 // POST - /experiencias/:id/fotos - añade una imagen a una experiencia
-app.post("/experiencias/:id/fotos", añadirFotosExperiencia);
+app.post("/experiencias/:id/fotos", existeExperiencia, añadirFotosExperiencia);
 
 // middleware para gestionar todos los errores
 
@@ -71,7 +80,7 @@ app.use((req, res, next) => {
   //console.log(res);
   res.status(404).send({
     status: "error",
-    message: "página no encontrada",
+    message: "No encontrad@",
   });
 });
 

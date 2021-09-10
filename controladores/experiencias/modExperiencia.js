@@ -7,19 +7,6 @@ const modExperiencia = async (req, res, next) => {
     connection = await getDB();
 
     const { id } = req.params;
-    // compruebo si existe
-    let [valor] = await connection.query(
-      `
-      SELECT id FROM experiencia WHERE id=?    
-      `,
-      [id]
-    );
-
-    if (valor.length === 0) {
-      const error = new Error("No hay ninguna experiencia con ese id");
-      error.httpStatus = 404;
-      throw error;
-    }
 
     //leo los campos que me llegan del body
     const {

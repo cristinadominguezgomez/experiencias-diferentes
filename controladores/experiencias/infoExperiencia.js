@@ -7,19 +7,6 @@ const infoExperiencia = async (req, res, next) => {
     // hacer la query id de params
     const { id } = req.params;
 
-    let [valor] = await connection.query(
-      `
-        SELECT id FROM experiencia WHERE id=?    
-    `,
-      [id]
-    );
-
-    if (valor.length === 0) {
-      const error = new Error("No hay ninguna experiencia con ese id");
-      error.httpStatus = 404;
-      throw error;
-    }
-
     const [result] = await connection.query(
       `
         
