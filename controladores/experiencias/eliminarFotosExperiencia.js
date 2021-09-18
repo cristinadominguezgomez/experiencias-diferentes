@@ -17,7 +17,6 @@ const eliminarFotosExperiencia = async (req, res, next) => {
     `,
       [fotoId, id]
     );
-    //console.log("fotoActual", fotoActual);
 
     // si no existe la foto devuelvo un error
 

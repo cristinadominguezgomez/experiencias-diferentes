@@ -10,7 +10,7 @@ const infoExperiencia = async (req, res, next) => {
     const [result] = await connection.query(
       `
         
-        SELECT experiencia.id, experiencia.fecha_insert, experiencia.titulo, experiencia.descripcion, experiencia.localidad, experiencia.n_plazas, experiencia.f_inicio, experiencia.f_fin, experiencia.precio, 
+        SELECT experiencia.id, experiencia.fecha_insert, experiencia.titulo, experiencia.descripcion, experiencia.localidad, experiencia.n_plazas, experiencia.f_inicio, experiencia.f_fin, experiencia.precio, experiencia.autor_id,
         AVG(IFNULL(experiencia_puntuacion.voto, 0)) AS votos
         FROM experiencia
         LEFT JOIN experiencia_puntuacion ON (experiencia.id = experiencia_puntuacion.experiencia_id)
@@ -18,8 +18,6 @@ const infoExperiencia = async (req, res, next) => {
     `,
       [id]
     );
-
-    let [single] = result;
 
     const [fotos] = await connection.query(
       `
@@ -36,7 +34,7 @@ const infoExperiencia = async (req, res, next) => {
     res.send({
       status: "ok",
       data: {
-        ...single,
+        ...result[0],
         fotos,
       },
     });

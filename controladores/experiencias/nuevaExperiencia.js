@@ -16,6 +16,7 @@ const nuevaExperiencia = async (req, res, next) => {
       f_inicio,
       f_fin,
       precio,
+      autor_id,
     } = req.body;
 
     //console.log(req); // para ver el data de la foto
@@ -27,7 +28,8 @@ const nuevaExperiencia = async (req, res, next) => {
       !n_plazas ||
       !f_inicio ||
       !f_fin ||
-      !precio
+      !precio ||
+      !autor_id
     ) {
       const error = new Error("Faltan campos obligatorios");
       error.httpStatus = 400;
@@ -39,8 +41,8 @@ const nuevaExperiencia = async (req, res, next) => {
 
     const [result] = await connection.query(
       `
-    INSERT INTO experiencia (fecha_insert, titulo, descripcion, localidad, n_plazas, f_inicio, f_fin, precio )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO experiencia (fecha_insert, titulo, descripcion, localidad, n_plazas, f_inicio, f_fin, precio, autor_id )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         
     `,
       [
@@ -52,6 +54,7 @@ const nuevaExperiencia = async (req, res, next) => {
         f_inicio,
         f_fin,
         precio,
+        autor_id,
       ]
     );
 

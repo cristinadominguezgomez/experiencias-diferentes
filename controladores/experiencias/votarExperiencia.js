@@ -22,8 +22,6 @@ const votarExperiencia = async (req, res, next) => {
       throw error;
     }
 
-    //console.log(id, idPart, voto);
-
     //controlar que el voto sea un numero del 1 al 5
     if (voto < 1 || voto > 5) {
       const error = new Error("El voto tiene que ser un valor del 1 al 5");

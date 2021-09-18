@@ -2,7 +2,8 @@ require("dotenv").config(); // gestiona las variables de entorno .env
 const path = require("path");
 const express = require("express"); // aplicacion para web para arrancar el servidor
 const morgan = require("morgan"); // imprimo datos de la peticion desde postman metodo ruta
-const fileUpload = require("express-fileupload"); //para leer el body form data para la subida de imagenes
+const fileUpload = require("express-fileupload"); // para leer el body form data para la subida de imagenes
+const cors = require("cors"); // para que no haya conflictos de los servidores del backend y frontend
 const {
   listExperiencias,
   infoExperiencia,
@@ -20,6 +21,9 @@ const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.en
 
 const app = express(); //creo instancia de express - llamo a express() para cada peticion
 //tiene un metodo, una ruta y una funcion
+
+// usar cors me permite abrir los dos servidores del backend y frontend en el mismo terminal
+app.use(cors());
 
 //con express puedo usar funciones, en esta caso uso morgan y elijo el parametro "dev"
 app.use(morgan("dev"));
