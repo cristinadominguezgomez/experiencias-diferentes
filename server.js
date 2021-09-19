@@ -17,7 +17,11 @@ const {
 
 const existeExperiencia = require("./middlewares/existeExperiencia");
 
-const { nuevoUsuario, registroUsuario } = require("./controladores/usuarios");
+const {
+  nuevoUsuario,
+  registroUsuario,
+  loginUsuario,
+} = require("./controladores/usuarios");
 
 const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.env);
 
@@ -87,6 +91,7 @@ app.post("/usuarios", nuevoUsuario);
 app.get("/usuarios/registro/:codigoActivacion", registroUsuario);
 
 // POST - /usuarios/login - login de un usuario (devuelve token)
+app.post("/usuarios/login", loginUsuario);
 
 // middleware para gestionar todos los errores
 

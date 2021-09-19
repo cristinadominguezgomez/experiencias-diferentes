@@ -19,7 +19,9 @@
 
 - Crear tabla de usuarios y la tabla de reservas ✅
 
-- Usuarios
+- Usuarios:
 - POST - /usuarios - crea un usuario pendiente de activar, envia email al usuario ✅
-- GET - /usuarios/registro/:codigoActivacion - valida un uuario recien registratado (el usuario valida su email)
-- POST - /usuarios/login - login de un usuario (devuelve token)
+- GET - /usuarios/registro/:codigoActivacion - valida un uuario recien registratado (el usuario valida su email)✅
+- POST - /usuarios/login - login de un usuario (devuelve token)✅
+- modificamos los endpoint de acceso con usuario
+- GET -/usuarios/:id - devuelve la informacion del usuario | Token obligatorio
