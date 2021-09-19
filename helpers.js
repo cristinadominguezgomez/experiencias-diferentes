@@ -4,6 +4,10 @@ const { ensureDir, unlink } = require("fs-extra");
 const path = require("path");
 const sharp = require("sharp");
 const uuid = require("uuid");
+const crypto = require("crypto");
+// sendgrid para enviar un email y lo configuro con mi codigo
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //funcion para formatear las fechas
 function formatDate(dateObject) {
@@ -40,8 +44,36 @@ async function eliminarFoto(nombreImagen) {
   await unlink(pathFoto);
 }
 
+// genero un codigo de activacion para envíar por email
+function generarCodigoActivacion() {
+  return crypto.randomBytes(40).toString("hex");
+}
+
+//envia email para validar un usuario
+async function enviarEmail({ to, subject, body }) {
+  try {
+    const msg = {
+      to,
+      from: process.env.SENDGRID_FROM,
+      subject,
+      text: body,
+      html: `
+      <div>
+      <h1>${subject}</h1>
+      <p>${body}</p>
+      </div>
+      `,
+    };
+    await sgMail.send(msg);
+  } catch (error) {
+    throw new Error("Error enviando email");
+  }
+}
+
 module.exports = {
   formatDate,
   guardarFoto,
   eliminarFoto,
+  generarCodigoActivacion,
+  enviarEmail,
 };

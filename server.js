@@ -17,6 +17,8 @@ const {
 
 const existeExperiencia = require("./middlewares/existeExperiencia");
 
+const nuevoUsuario = require("./controladores/usuarios");
+
 const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.env);
 
 const app = express(); //creo instancia de express - llamo a express() para cada peticion
@@ -46,6 +48,9 @@ app.get("/", (req, res, next) => {
     message: "Página principal",
   });
 });
+
+// ENDPOINTS EXPERIENCIAS
+
 //GET - /experiencias - lista todas las experiencias
 app.get("/experiencias", listExperiencias);
 
@@ -70,8 +75,17 @@ app.delete("/experiencias/:id", existeExperiencia, eliminaExperiencia);
 // POST - /experiencias/:id/fotos - añade una imagen a una experiencia
 app.post("/experiencias/:id/fotos", existeExperiencia, añadirFotosExperiencia);
 
-//POST - /experiencia/:id/votos/:userId - vota una experiencia
+// POST - /experiencia/:id/votos/:userId - vota una experiencia
 app.post("/experiencia/:id/votos/:idPart", existeExperiencia, votarExperiencia);
+
+// ENDPOINS USUARIOS
+
+// POST - /usuarios - crea un usuario pendiente de activar
+app.post("/usuarios", nuevoUsuario);
+
+// GET - /usuarios/registro/:codigoActivacion - valida un uuario recien registratado (mediante email)
+
+// POST - /usuarios/login - login de un usuario (devuelve token)
 
 // middleware para gestionar todos los errores
 
