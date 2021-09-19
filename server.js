@@ -17,7 +17,7 @@ const {
 
 const existeExperiencia = require("./middlewares/existeExperiencia");
 
-const nuevoUsuario = require("./controladores/usuarios");
+const { nuevoUsuario, registroUsuario } = require("./controladores/usuarios");
 
 const { PORT, HOST, RECURSOS_DIRECTORY } = process.env; //console.log(process.env);
 
@@ -80,10 +80,11 @@ app.post("/experiencia/:id/votos/:idPart", existeExperiencia, votarExperiencia);
 
 // ENDPOINS USUARIOS
 
-// POST - /usuarios - crea un usuario pendiente de activar
+// POST - /usuarios - crea un usuario pendiente de activar (envia email al usuario)
 app.post("/usuarios", nuevoUsuario);
 
-// GET - /usuarios/registro/:codigoActivacion - valida un uuario recien registratado (mediante email)
+// GET - /usuarios/registro/:codigoActivacion - valida un uuario recien registratado (el usuario valida su email)
+app.get("/usuarios/registro/:codigoActivacion", registroUsuario);
 
 // POST - /usuarios/login - login de un usuario (devuelve token)
 
