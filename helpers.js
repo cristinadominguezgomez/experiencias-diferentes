@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { format } = require("date-fns"); //modulo para formatear fechas
 // unlink para eliminar el path de las fotos
 const { ensureDir, unlink } = require("fs-extra");

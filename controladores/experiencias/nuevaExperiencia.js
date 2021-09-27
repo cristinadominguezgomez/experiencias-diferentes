@@ -1,5 +1,5 @@
 const getDB = require("../../db");
-const { formatDate, guardarFoto } = require("../../helpers");
+const { guardarFoto } = require("../../helpers");
 
 const nuevaExperiencia = async (req, res, next) => {
   let connection;
@@ -16,7 +16,6 @@ const nuevaExperiencia = async (req, res, next) => {
       f_inicio,
       f_fin,
       precio,
-      autor_id,
     } = req.body;
 
     //console.log(req); // para ver el data de la foto
@@ -28,8 +27,7 @@ const nuevaExperiencia = async (req, res, next) => {
       !n_plazas ||
       !f_inicio ||
       !f_fin ||
-      !precio ||
-      !autor_id
+      !precio
     ) {
       const error = new Error("Faltan campos obligatorios");
       error.httpStatus = 400;
@@ -38,6 +36,16 @@ const nuevaExperiencia = async (req, res, next) => {
 
     // hacemos la insert en la BD
     const now = new Date();
+    const date_inicio = new Date(f_inicio);
+    const date_fin = new Date(f_fin);
+
+    if (date_inicio > date_fin) {
+      const error = new Error(
+        "La fecha de inicio no puede ser posterior a la fecha de fin"
+      );
+      error.httpStatus = 400;
+      throw error;
+    }
 
     const [result] = await connection.query(
       `
@@ -46,23 +54,26 @@ const nuevaExperiencia = async (req, res, next) => {
         
     `,
       [
-        formatDate(now),
+        now,
         titulo,
         descripcion,
         localidad,
         n_plazas,
-        f_inicio,
-        f_fin,
+        date_inicio,
+        date_fin,
         precio,
-        autor_id,
+        req.userAuth.id,
       ]
     );
 
     //saco el id de la nueva experiencia
-    const [{ insertId }] = [result];
+    // const [{ insertId }] = [result];
 
     //proceso las fotos
     const fotos = [];
+
+    console.log(result.insertId);
+    console.log(req.files);
 
     if (req.files && Object.keys(req.files).length > 0) {
       for (const foto of Object.values(req.files).slice(0, 4)) {
@@ -78,7 +89,7 @@ const nuevaExperiencia = async (req, res, next) => {
 
           
         `,
-          [formatDate(now), nombreFoto, result.insertId]
+          [now, nombreFoto, result.insertId]
         );
       }
     }
@@ -86,10 +97,11 @@ const nuevaExperiencia = async (req, res, next) => {
     res.send({
       status: "ok",
       data: {
-        id: insertId,
+        id: result.insertId,
         titulo,
         descripcion,
         localidad,
+        autor_id: req.userAuth.id,
         n_plazas,
         f_inicio,
         f_fin,

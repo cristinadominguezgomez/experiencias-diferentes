@@ -20,7 +20,7 @@ const loginUsuario = async (req, res, next) => {
     // busco el usuario en la base de datos
     const [user] = await connection.query(
       `
-    SELECT id, privilegios, activo FROM usuario WHERE email=? AND contraseña=SHA2(?,512)
+    SELECT id, privilegios, activo FROM usuario WHERE email=? AND contraseña=SHA2(?, 512)
     `,
       [email, contraseña]
     );
@@ -37,7 +37,7 @@ const loginUsuario = async (req, res, next) => {
       const error = new Error(
         "Usuario pendiente de validacion, revise su email"
       );
-      httpStatus = 401;
+      error.httpStatus = 401;
       throw error;
     }
 
@@ -50,7 +50,7 @@ const loginUsuario = async (req, res, next) => {
     // para encriptar la informacion necesito una contraseña que guardo en .env (la genero con lastpass)
     // y un objeto con la expiracion (en este caso 1 mes)
     const token = jwt.sign(info, process.env.SECRET, { expiresIn: "30d" });
-    console.log(token);
+    //console.log(token);
 
     res.send({
       status: "ok",

@@ -16,6 +16,7 @@ const {
 } = require("./controladores/experiencias");
 
 const existeExperiencia = require("./middlewares/existeExperiencia");
+const esUsuario = require("./middlewares/esUsuario");
 
 const {
   nuevoUsuario,
@@ -38,7 +39,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //middleware para acceder desde postman a los recursos estaticos
-app.use(express.static(path.join(__dirname, RECURSOS_DIRECTORY)));
+app.use("/fotos", express.static(path.join(__dirname, RECURSOS_DIRECTORY)));
 
 //para gestionar el body para subida de imagenes (multipart form data)
 //multer ó express-fileupload
@@ -62,25 +63,41 @@ app.get("/experiencias", listExperiencias);
 app.get("/experiencias/:id", existeExperiencia, infoExperiencia);
 
 // POST - /experiencias/- crea una experiencia
-app.post("/experiencias", nuevaExperiencia);
+app.post("/experiencias", esUsuario, nuevaExperiencia);
 
 // PUT - /experiencias/:id - edita una experiencia
-app.put("/experiencias/:id", existeExperiencia, modExperiencia);
+app.put("/experiencias/:id", esUsuario, existeExperiencia, modExperiencia);
 
 // DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experienciapare
 app.delete(
   "/experiencias/:id/fotos/:fotoId",
+  esUsuario,
   existeExperiencia,
   eliminarFotosExperiencia
 );
 // DELETE - /experiencias/:id - borra una experiencia
-app.delete("/experiencias/:id", existeExperiencia, eliminaExperiencia);
+app.delete(
+  "/experiencias/:id",
+  esUsuario,
+  existeExperiencia,
+  eliminaExperiencia
+);
 
 // POST - /experiencias/:id/fotos - añade una imagen a una experiencia
-app.post("/experiencias/:id/fotos", existeExperiencia, añadirFotosExperiencia);
+app.post(
+  "/experiencias/:id/fotos",
+  esUsuario,
+  existeExperiencia,
+  añadirFotosExperiencia
+);
 
 // POST - /experiencia/:id/votos/:userId - vota una experiencia
-app.post("/experiencia/:id/votos/:idPart", existeExperiencia, votarExperiencia);
+app.post(
+  "/experiencia/:id/votos/:idPart",
+  esUsuario,
+  existeExperiencia,
+  votarExperiencia
+);
 
 // ENDPOINS USUARIOS
 

@@ -6,9 +6,33 @@ const modExperiencia = async (req, res, next) => {
   try {
     connection = await getDB();
 
-    const { id } = req.params;
+    const { id } = req.params; // id experiencia
+    //console.log("id", id);
 
-    //leo los campos que me llegan del body
+    // controlar si el usuario que creo la experiencia es el mismo que el del token ó admin
+    const [user] = await connection.query(
+      `
+    SELECT autor_id
+    FROM experiencia
+    WHERE id=?
+    
+    `,
+      [id]
+    );
+
+    console.log("user", user);
+    if (
+      user[0].autor_id !== req.userAuth.id &&
+      req.userAuth.privilegios !== "admin"
+    ) {
+      const error = new Error(
+        "No tiene permisos para modificar esta experiencia"
+      );
+      error.httpStatus = 401;
+      throw error;
+    }
+
+    // leo los campos que me llegan del body
     const {
       titulo,
       descripcion,
@@ -19,7 +43,7 @@ const modExperiencia = async (req, res, next) => {
       precio,
     } = req.body;
 
-    console.log(req.body);
+    //console.log(req.body);
 
     //compruebo los campos obligatorios
     if (
@@ -61,6 +85,7 @@ const modExperiencia = async (req, res, next) => {
       data: {
         id,
         fecha_mod,
+        autor_id: req.userAuth.id,
         titulo,
         descripcion,
         localidad,

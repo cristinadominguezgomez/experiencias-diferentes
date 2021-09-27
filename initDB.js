@@ -143,7 +143,7 @@ codigo_activacion VARCHAR(100)
                 "${formatDate(new Date())}",
                 "${formatDate(new Date())}",
                 ${random(20, 300)},
-                1
+                ${random(2, num_experiencias + 1)}
       )
       `);
     }

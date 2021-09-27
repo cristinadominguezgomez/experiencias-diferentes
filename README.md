@@ -10,12 +10,12 @@
 
 - GET - /experiencias - lista todas las experiencias con fotos y autor ✅
 - GET - /experiencias/:id - muestra la info de una experiencia con fotos y autor ✅
-- POST - /experiencias/:id - crea una experiencia ✅
-- POST - /experiencias/:id/fotos - añade una imagen a una experiencia ✅
-- PUT - /experiencias/:id - edita el titulo, la descripcion, la localidad el numero de plazas, las fechas de inicio y fin y el precion de una experiencia ✅
-- DELETE - /experiencias/:id ✅
-- DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experienciapare ✅
-- POST - /experiencia/:id/votos/:idPart - vota una experiencia solo el usuario que ha participado despues de la experiencia✅
+- POST - /experiencias/:id - crea una experiencia || Token obligatorio ✅
+- POST - /experiencias/:id/fotos - añade una imagen a una experiencia || Token obligatorio ✅
+- PUT - /experiencias/:id - edita el titulo, la descripcion, la localidad el numero de plazas, las fechas de inicio y fin y el precion de una experiencia || Token obligatorio ✅ Solo admin ó el usuario que creo la experiencia
+- DELETE - /experiencias/:id ✅ |Token obligatorio
+- DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experienciapare ✅ | Token obligatorio
+- POST - /experiencia/:id/votos/:idPart - vota una experiencia solo el usuario que ha participado despues de la experiencia✅ | Token obligatorio
 
 - Crear tabla de usuarios y la tabla de reservas ✅
 
