@@ -1,5 +1,6 @@
 const getDB = require("../../db");
 const { formatDate } = require("../../helpers");
+const { differenceInHours } = require("date-fns");
 
 const modExperiencia = async (req, res, next) => {
   let connection;
@@ -7,12 +8,11 @@ const modExperiencia = async (req, res, next) => {
     connection = await getDB();
 
     const { id } = req.params; // id experiencia
-    //console.log("id", id);
 
-    // controlar si el usuario que creo la experiencia es el mismo que el del token ó admin
+    // controlar si el usuario que creo la experiencia es el mismo que el del token ó admin y solo pueden modificarla durante 1 hora
     const [user] = await connection.query(
       `
-    SELECT autor_id
+    SELECT autor_id, fecha_insert
     FROM experiencia
     WHERE id=?
     
@@ -29,6 +29,20 @@ const modExperiencia = async (req, res, next) => {
         "No tiene permisos para modificar esta experiencia"
       );
       error.httpStatus = 401;
+      throw error;
+    }
+    // comprobar si paso mas de 1 hora (date-fns)
+
+    const diferencia = differenceInHours(
+      new Date(),
+      new Date(user[0].fecha_insert)
+    );
+    //console.log("diferencia", diferencia);
+    if (diferencia > 1 && req.userAuth.privilegios !== "admin") {
+      const error = new Error(
+        "Ya ha pasado mas de 1 hora, no tiene permisos para modificar la experiencia"
+      );
+      error.httpStatus = 403;
       throw error;
     }
 

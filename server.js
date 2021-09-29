@@ -17,6 +17,8 @@ const {
 
 const existeExperiencia = require("./middlewares/existeExperiencia");
 const esUsuario = require("./middlewares/esUsuario");
+const estaAutorizado = require("./middlewares/estaAutorizado");
+const esAdmin = require("./middlewares/esAdmin");
 
 const {
   nuevoUsuario,
@@ -66,13 +68,20 @@ app.get("/experiencias/:id", existeExperiencia, infoExperiencia);
 app.post("/experiencias", esUsuario, nuevaExperiencia);
 
 // PUT - /experiencias/:id - edita una experiencia
-app.put("/experiencias/:id", esUsuario, existeExperiencia, modExperiencia);
+app.put(
+  "/experiencias/:id",
+  esUsuario,
+  existeExperiencia,
+  estaAutorizado,
+  modExperiencia
+);
 
 // DELETE - /experiencias/:id/fotos/:fotoId - borra una imagen de una experienciapare
 app.delete(
   "/experiencias/:id/fotos/:fotoId",
   esUsuario,
   existeExperiencia,
+  estaAutorizado,
   eliminarFotosExperiencia
 );
 // DELETE - /experiencias/:id - borra una experiencia
@@ -80,6 +89,7 @@ app.delete(
   "/experiencias/:id",
   esUsuario,
   existeExperiencia,
+  esAdmin,
   eliminaExperiencia
 );
 
@@ -88,6 +98,7 @@ app.post(
   "/experiencias/:id/fotos",
   esUsuario,
   existeExperiencia,
+  estaAutorizado,
   añadirFotosExperiencia
 );
 

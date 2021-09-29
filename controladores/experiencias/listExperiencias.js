@@ -66,7 +66,7 @@ const listExperiencias = async (req, res, next) => {
         )})
         `
       );
-      console.log("result", result);
+      //console.log("result", result);
 
       // junto el array de fotos con los resultados
       resultConFotos = result.map((result) => {

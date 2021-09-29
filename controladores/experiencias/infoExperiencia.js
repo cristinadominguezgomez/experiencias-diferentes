@@ -14,6 +14,7 @@ const infoExperiencia = async (req, res, next) => {
         AVG(IFNULL(experiencia_puntuacion.voto, 0)) AS votos
         FROM experiencia
         LEFT JOIN experiencia_puntuacion ON (experiencia.id = experiencia_puntuacion.experiencia_id)
+        
         WHERE experiencia.id = ?
     `,
       [id]

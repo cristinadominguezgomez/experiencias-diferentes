@@ -26,12 +26,12 @@ const esUsuario = async (req, res, next) => {
       error.httpStatus = 401;
       throw error;
     }
-    //console.log(tokenInfo);
 
-    // tenemos que coger del token el id y los privilegios para pasarselo al siguiente middleware en la req
+    // tenemos que coger del token (id, privilegios) y pasarselo a la req. con el nombre userAuth para pasarselo al middleeware que lo necesite
+    //console.log(tokenInfo);
     req.userAuth = tokenInfo;
 
-    console.log("Controlo el token. Token", authorization);
+    //console.log("Controlo el token. Token", authorization);
 
     // voy al proximo middleware
     next();
